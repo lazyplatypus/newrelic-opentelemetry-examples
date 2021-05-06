@@ -4,6 +4,8 @@ receivers:
   otlp:
     protocols:
       grpc:
+  zipkin:
+    endpoint: 0.0.0.0:9411
 exporters:
   logging:
     logLevel: $LOG_EXPORTER_LOG_LEVEL
@@ -16,7 +18,7 @@ service:
       receivers: [otlp]
       exporters: [logging, newrelic]
     traces:
-      receivers: [otlp]
+      receivers: [otlp,zipkin]
       exporters: [logging, newrelic]
     # TODO: add log exporter once available
     # logs:
